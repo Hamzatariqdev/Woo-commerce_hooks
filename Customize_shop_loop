@@ -1,0 +1,15 @@
+//remove prices from product loop
+add_action( 'woocommerce_after_shop_loop_item_title', 'remove_prices_if_zero' );
+function remove_prices_if_zero() {
+  global $product;
+  
+  //echo "<div class='ss'>".$product->get_ID()."----".$product->get_price()."</div>";
+  
+ if( $product->get_price() == 0) 
+  {
+  
+  	 echo "<style> .post-".$product->get_ID()." span.price{display:none !important;}</style>";
+  	
+  }
+  
+}
