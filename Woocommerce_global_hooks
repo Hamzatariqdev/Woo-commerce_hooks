@@ -1,0 +1,35 @@
+//pre_get_product_search_form
+//It permits adding more information to the standard product search.
+
+function my_custom_search_form_args( $args ) {
+    $args['method'] = 'post';
+
+    $args['label'] = 'Search Products:';
+    $args['placeholder'] = 'Enter product name or keyword';
+
+    return $args;
+}
+add_filter( 'pre_get_product_search_form', 'my_custom_search_form_args' );
+
+------------------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_breadcrumb
+//It enables data to be shown above URL breadcrumbs.
+
+function my_custom_breadcrumb() {
+    echo '<div class="woocommerce-breadcrumb">';
+    woocommerce_breadcrumb();
+    echo '</div>';
+}
+add_action( 'woocommerce_before_main_content', 'my_custom_breadcrumb', 20 );
+
+------------------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_no_products_found
+//If no goods have been discovered, it permits the necessary information to be displayed on the Search page.
+
+function my_custom_no_products_found_message() {
+    echo '<p class="woocommerce-info">Sorry, no products were found. Please try a different search term or browse our categories.</p>';
+}
+
+add_action( 'woocommerce_no_products_found', 'my_custom_no_products_found_message' );
