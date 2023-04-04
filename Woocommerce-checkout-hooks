@@ -1,0 +1,299 @@
+                                                  /*   Hooks used before the user contact information form   */
+
+//woocommerce_before_checkout_form
+
+function my_custom_checkout_message() {
+    echo '<p>Please review your order before proceeding to payment.</p>';
+}
+add_action( 'woocommerce_before_checkout_form', 'my_custom_checkout_message' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_checkout_before_customer_details
+
+function my_custom_checkout_message() {
+    echo '<p>Enter your personal and shipping information below:</p>';
+}
+add_action( 'woocommerce_checkout_before_customer_details', 'my_custom_checkout_message' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_checkout_billing
+
+function my_custom_billing_field( $fields ) {
+    $fields['billing_custom_field'] = array(
+        'type' => 'text',
+        'label' => __( 'Custom Field', 'my-textdomain' ),
+        'required' => true,
+        'class' => array( 'form-row-wide' ),
+        'clear' => true
+    );
+    return $fields;
+}
+add_filter( 'woocommerce_checkout_fields', 'my_custom_billing_field' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+                                             /*   hooks that are used for setting markup of billing details   */ 
+
+//woocommerce_after_checkout_billing_form
+
+function my_custom_checkout_message() {
+    echo '<p>Enter your billing information above and continue to the next step:</p>';
+}
+add_action( 'woocommerce_after_checkout_billing_form', 'my_custom_checkout_message' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_checkout_shipping
+
+function my_custom_shipping_field( $fields ) {
+    $fields['shipping_custom_checkbox'] = array(
+        'type' => 'checkbox',
+        'label' => __( 'Custom Checkbox', 'my-textdomain' ),
+        'required' => false,
+        'class' => array( 'form-row-wide' ),
+        'clear' => true
+    );
+    return $fields;
+}
+add_filter( 'woocommerce_checkout_fields', 'my_custom_shipping_field' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_before_order_notes
+
+function my_custom_order_notes_message() {
+    echo '<p>Please provide any special instructions for your order in the field below.</p>';
+}
+add_action( 'woocommerce_before_order_notes', 'my_custom_order_notes_message' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_after_order_notes
+
+function my_custom_checkout_field() {
+    echo '<p>Please enter your phone number below:</p>';
+    woocommerce_form_field( 'phone', array(
+        'type' => 'tel',
+        'class' => array( 'my-field-class form-row-wide' ),
+        'required' => true,
+        'label' => 'Phone Number',
+    ), '' );
+}
+add_action( 'woocommerce_after_order_notes', 'my_custom_checkout_field' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_checkout_after_order_review
+
+function my_custom_checkout_field() {
+    echo '<p>Please enter your preferred delivery date below:</p>';
+    woocommerce_form_field( 'delivery_date', array(
+        'type' => 'date',
+        'class' => array( 'my-field-class form-row-wide' ),
+        'required' => true,
+        'label' => 'Delivery Date',
+    ), '' );
+}
+add_action( 'woocommerce_checkout_after_order_review', 'my_custom_checkout_field' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+                                                /*    hooks that are used before the order’s product summary   */
+
+//woocommerce_checkout_after_customer_details
+
+function my_custom_checkout_field() {
+    echo '<p>Please enter your billing information below:</p>';
+    woocommerce_form_field( 'billing_info', array(
+        'type' => 'textarea',
+        'class' => array( 'my-field-class form-row-wide' ),
+        'required' => true,
+        'label' => 'Billing Information',
+    ), '' );
+}
+add_action( 'woocommerce_checkout_after_customer_details', 'my_custom_checkout_field' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_checkout_before_order_review
+
+function my_custom_checkout_field() {
+    echo '<p>Please review your order and make sure everything looks good:</p>';
+    woocommerce_form_field( 'additional_notes', array(
+        'type' => 'textarea',
+        'class' => array( 'my-field-class form-row-wide' ),
+        'required' => false,
+        'label' => 'Additional Notes',
+    ), '' );
+}
+add_action( 'woocommerce_checkout_before_order_review', 'my_custom_checkout_field' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_review_order_before_cart_contents
+
+function my_custom_review_order_field() {
+    echo '<p>Please review the items in your cart and make sure everything looks good:</p>';
+    woocommerce_form_field( 'additional_notes', array(
+        'type' => 'textarea',
+        'class' => array( 'my-field-class form-row-wide' ),
+        'required' => false,
+        'label' => 'Additional Notes',
+    ), '' );
+}
+add_action( 'woocommerce_review_order_before_cart_contents', 'my_custom_review_order_field' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_review_order_after_cart_contents
+
+function my_custom_review_order_field() {
+    echo '<p>Please review the items in your cart and make sure everything looks good:</p>';
+    woocommerce_form_field( 'additional_notes', array(
+        'type' => 'textarea',
+        'class' => array( 'my-field-class form-row-wide' ),
+        'required' => false,
+        'label' => 'Additional Notes',
+    ), '' );
+}
+add_action( 'woocommerce_review_order_after_cart_contents', 'my_custom_review_order_field' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_review_order_before_shipping
+
+function my_custom_shipping_content() {
+    echo '<p>Enter your shipping preferences below:</p>';
+}
+add_action( 'woocommerce_review_order_before_shipping', 'my_custom_shipping_content' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_review_order_after_shipping
+
+function my_custom_shipping_content() {
+    echo '<p>Need your order by a specific date? Enter the date below:</p>';
+    echo '<input type="date" name="delivery_date">';
+}
+add_action( 'woocommerce_review_order_after_shipping', 'my_custom_shipping_content' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_review_order_before_order_total
+
+function my_custom_checkout_content() {
+    echo '<p>Have a discount code? Enter it below:</p>';
+    echo '<input type="text" name="discount_code">';
+}
+add_action( 'woocommerce_review_order_before_order_total', 'my_custom_checkout_content' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_review_order_after_order_total
+
+function my_custom_checkout_content() {
+    echo '<p>By clicking "Place Order", you agree to our terms and conditions.</p>';
+}
+add_action( 'woocommerce_review_order_after_order_total', 'my_custom_checkout_content' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+                                                  /*    hooks that are displayed below the order form   */
+
+//woocommerce_checkout_order_review
+
+function my_custom_checkout_content() {
+    echo '<p>Thank you for choosing our store! Your order will be processed soon.</p>';
+}
+add_action( 'woocommerce_checkout_order_review', 'my_custom_checkout_content' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_review_order_before_payment
+
+add_action( 'woocommerce_review_order_before_payment', 'my_custom_checkout_content' );
+function my_custom_checkout_content() {
+    echo '<p>Thank you for shopping with us!</p>';
+}
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_review_order_before_submit
+
+add_action( 'woocommerce_review_order_before_submit', 'my_custom_checkout_content' );
+function my_custom_checkout_content() {
+    echo '<p>By submitting your order, you agree to our terms and conditions.</p>';
+}
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_review_order_after_submit
+
+add_action( 'woocommerce_review_order_after_submit', 'my_custom_checkout_content' );
+
+function my_custom_checkout_content() {
+  echo '<p>Thank you for your purchase!</p>';
+}
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_review_order_after_payment
+
+function my_custom_payment_fields() {
+    // Add custom content or fields after payment section
+}
+add_action( 'woocommerce_review_order_after_payment', 'my_custom_payment_fields' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_after_checkout_form
+
+function my_custom_checkout_content() {
+  echo '<p>Thank you for choosing our store! We appreciate your business.</p>';
+}
+add_action( 'woocommerce_after_checkout_form', 'my_custom_checkout_content' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+                                                /*    hooks that are displayed in the product list of an order   */
+
+//woocommerce_order_items_table
+
+function my_custom_order_items_table( $order ) {
+    echo '<tr><td colspan="2"><strong>My Custom Content:</strong></td><td colspan="2">Lorem ipsum dolor sit amet</td></tr>';
+}
+add_action( 'woocommerce_order_items_table', 'my_custom_order_items_table' );
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_order_item_meta_start
+
+add_action( 'woocommerce_order_item_meta_start', 'my_custom_order_item_meta_start', 10, 3 );
+function my_custom_order_item_meta_start( $item_id, $item, $order ) {
+    echo '<div class="my-custom-class">';
+    echo '<p>This is my custom content before order item meta data.</p>';
+}
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_order_details_after_order_table
+
+add_action( 'woocommerce_order_details_after_order_table', 'my_custom_content' );
+
+function my_custom_content( $order ) {
+  echo '<p>Thank you for your order. Your tracking number is: ' . $order->get_meta( 'tracking_number' ) . '</p>';
+}
+
+---------------------------------------------------------------------------------------------------------------------
+
+//woocommerce_thankyou
+
+add_action( 'woocommerce_thankyou', 'my_custom_thankyou_message' );
+
+function my_custom_thankyou_message( $order_id ) {
+    echo '<p>Thank you for your purchase! We appreciate your business.</p>';
+}
+
